@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+   Склады | {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Склады</h1>
+    {% if stocks %}
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Город</th>
+                <th>Адрес</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td><a href="{% url 'stock' pk=stock.pk %}">{{ stock.name }}</a></td>
+                    <td>{{ stock.city.name }} ({{ stock.city.country.name }})</td>
+                    <td>{{ stock.address }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">
+            <i>Нету ни одного склада.</i>
+        </p>
+    {% endif %}
+{% endblock %}

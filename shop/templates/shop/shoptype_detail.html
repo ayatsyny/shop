@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{ shoptype.name }} | Типы магазинов | {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Типы магазинов: {{ shoptype.name }}</h1>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Название:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    {{ shoptype.name }}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

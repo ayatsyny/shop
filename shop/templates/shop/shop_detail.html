@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{ shop.name }} | Магазины | {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Магазины: {{ shop.name }}</h1>
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Название:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    {{ shop.name }}
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Тип магазина:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    <a href="{% url 'shoptype' pk=shop.type.pk %}">
+                        {{ shop.type.name }}
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Владелец:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    <a href="{% url 'person' pk=shop.owner.pk %}">
+                        {{ shop.owner.get_full_name }}
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Город:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    <a href="{% url 'city' pk=shop.city.pk %}">
+                        {{ shop.city.name }} ({{ shop.city.country.name }})
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Адрес:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    {{ shop.address }} ({{ shop.address }})
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Продавцы:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    {% for seller in shop.sellers.all %}
+                        <a href="{% url 'person' pk=seller.pk %}">
+                            {{ seller.get_full_name }}</a>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Склады:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    {% for stock in shop.stocks.all %}
+                        <a href="{% url 'stock' pk=stock.pk %}">
+                            <b>{{ stock.name }}</b>
+                            ({{ stock.city.name }},
+                             {{ stock.city.country.name }})</a>{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Веб-сайт:</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    {{ shop.website|urlize }}
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+   Страны | {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Страны</h1>
+
+    {% if countries %}
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for country in countries %}
+                <tr>
+                    <td><a href="{% url 'country' pk=country.pk %}">{{ country.name }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">
+            <i>Нету ни одной страны.</i>
+        </p>
+    {% endif %}
+{% endblock %}

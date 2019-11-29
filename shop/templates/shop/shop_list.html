@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+   Магазины | {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Магазины</h1>
+    {% if shops %}
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Тип магазина</th>
+                <th>Город</th>
+                <th>Адрес</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shop in shops %}
+                <tr>
+                    <td><a href="{% url 'shop' pk=shop.pk %}">{{ shop.name }}</a></td>
+                    <td>{{ shop.type.name }}</td>
+                    <td>{{ shop.city.name }} ({{ shop.city.country.name }})</td>
+                    <td>{{ shop.address }} ({{ shop.address }})</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">
+            <i>Нету ни одного магазина.</i>
+        </p>
+    {% endif %}
+{% endblock %}

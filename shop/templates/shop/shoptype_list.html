@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+   Типы магазинов | {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+    <h1>Типы магазинов</h1>
+
+    {% if shoptypes %}
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Название</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shoptype in shoptypes %}
+                <tr>
+                    <td><a href="{% url 'shoptype' pk=shoptype.pk %}">{{ shoptype.name }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted">
+            <i>Нету ни одного типа магазинов.</i>
+        </p>
+    {% endif %}
+{% endblock %}

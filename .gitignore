@@ -1,0 +1,12 @@
+# Pycharm IDE
+.idea/
+
+# python compile *.pyc
+*.pyc
+
+# DB
+db.sqlite3
+
+# static
+static/
+media/
